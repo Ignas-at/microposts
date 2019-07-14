@@ -18,7 +18,7 @@ document.querySelector('.card-form').addEventListener('click', cancelEdit);
 
 // Get Posts
 function getPosts() {
-  http.get('http://localhost:3000/posts')
+  http.get('http://localhost/posts')
     .then(data => ui.showPosts(data))
     .catch(err => console.log(err));
 }
@@ -41,7 +41,7 @@ function submitPost() {
     // Check for ID
     if(id === '') {
       // Create Post
-      http.post('http://localhost:3000/posts', data)
+      http.post('http://localhost/posts', data)
       .then(data => {
         ui.showAlert('Post added', 'alert alert-success');
         ui.clearFields();
@@ -50,7 +50,7 @@ function submitPost() {
       .catch(err => console.log(err));
     } else {
       // Update Post
-      http.put(`http://localhost:3000/posts/${id}`, data)
+      http.put(`http://localhost/posts/${id}`, data)
       .then(data => {
         ui.showAlert('Post updated', 'alert alert-success');
         ui.changeFormState('add');
@@ -67,7 +67,7 @@ function deletePost(e) {
   if(e.target.parentElement.classList.contains('delete')) {
     const id = e.target.parentElement.dataset.id;
     if(confirm('Are you sure?')) {
-      http.delete(`http://localhost:3000/posts/${id}`)
+      http.delete(`http://localhost/posts/${id}`)
         .then(data => {
           ui.showAlert('Post removed', 'alert alert-success');
           getPosts();
